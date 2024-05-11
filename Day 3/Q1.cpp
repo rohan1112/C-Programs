@@ -13,19 +13,16 @@ public:
     Student(){
         cout<<"no-arg contructor"<<endl;
     }
-    Student(int rollNo,char name[]){
+    Student(int rollNo,const char name[]){
         this->rollNo;
          this->name = new char[strlen(name) + 1];
-        strcpy(this->name, name);
+        strcpy_s(this->name,strlen(name) + 1, name);
         cout<<"params Contructor"<<endl;
     }
     ~Student(){
         cout<<"In destructor of "<<rollNo<<"\t"<<name<<endl;
         delete[] name;
     }
-
-
-
 };
 
 int main(){
