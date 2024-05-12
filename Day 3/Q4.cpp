@@ -9,20 +9,16 @@ using namespace std;
 
 class Student{
     int rollNo;
-    char* name;
 public:
     Student(){
         cout<<"no-arg contructor"<<endl;
     }
     Student(int rollNo,char name[]){
         this->rollNo;
-         this->name = new char[strlen(name) + 1];
-        strcpy(this->name, name);
         cout<<"params Contructor"<<endl;
     }
     ~Student(){
-        cout<<"In destructor of "<<rollNo<<"\t"<<name<<endl;
-        delete[] name;
+        cout<<"In destructor of "<<endl;
     }
     void disp(){
         cout<<"indisp"<<endl;

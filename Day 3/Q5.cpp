@@ -5,43 +5,56 @@
 using namespace std;
 
 class Student{
-    int rollNo;
     char* name;
+    int rollNo;
+    static int cnt;
 public:
     Student(){
+        name=NULL;
         cout<<"no-arg contructor"<<endl;
+        cnt++;
+
     }
-    Student(int rollNo,char name[]){
-        this->rollNo;
-         this->name = new char[strlen(name) + 1];
-        strcpy(this->name, name);
+    Student(int rollNo,const char* str){
+        this->rollNo=rollNo;
+        name = new char[strlen(str) + 1];
+        strcpy_s(name,strlen(name) + 1, str);
         cout<<"params Contructor"<<endl;
+        cnt++;
     }
-    Student(Student &ref){
+    Student(const Student &ref){
         this->rollNo=ref.rollNo;
-        this->name = new char[strlen(ref.name) + 1];
-        strcpy(this->name, ref.name);
+        name = new char[strlen(ref.name) + 1];
+        strcpy_s(name,strlen(ref.name) + 1, ref.name);
         cout<<"In copy constructor"<<endl;
+        cnt++;
 
     }
     ~Student(){
-        cout<<"In destructor of "<<rollNo<<"\t"<<name<<endl;
         delete[] name;
+        cnt--;
+        cout<<"In destructor of "<<rollNo<<endl;
+    }
+    static int getCount(){
+        return cnt;
     }
     void disp(){
         cout<<"indisp"<<endl;
     }
 };
+int Student::cnt=0;
 int main(){
     
     Student s;
-    Student s1(01,"Akshay");
+    Student s1(1,"Akshay");
     Student* s2=new Student();
-    Student* s3=new Student(02,"Rohit");
+    Student* s3=new Student(2,"Rohit");
     Student s4=s1; 
+    cout<<"Count "<<Student::getCount()<<endl;
 
     delete s2;
     delete s3;
+    cout<<"Count "<<Student::getCount()<<endl;
 
     return 0;
 }
